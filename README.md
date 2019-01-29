@@ -1,0 +1,4 @@
+requirements:
+
+Django==2.1.5 
+pytz==2018.7
