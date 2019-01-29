@@ -6,9 +6,11 @@
 
 {% block content %}
     <h1 class="mb-5">Posts:</h1>
-    {% for post in page_object.object_list %}
+
+    {% for post in page_object %}
         {% include 'blog/includes/post_card_template.html' %}
     {% endfor %}
+
     {#paginator#}
     {% if is_paginated %}
         <nav aria-label="...">
@@ -37,4 +39,5 @@
         </nav>
     {% endif %}
     {#paginator#}
+
 {% endblock %}
