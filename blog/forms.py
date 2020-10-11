@@ -6,11 +6,10 @@ from django.core.exceptions import ValidationError
 class TagForm(forms.ModelForm):
     class Meta:
         model = Tag
-        fields = ['title', 'slug']
+        fields = ['title']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'})
         }
 
     def clean_slug(self):
@@ -22,14 +21,14 @@ class TagForm(forms.ModelForm):
             raise ValidationError('Slug must be unique!!! We have "{}" slug already!'.format(new_slug))
         return new_slug
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'body', 'tags']
+        fields = ['title', 'body', 'tags']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'tags': forms.SelectMultiple(attrs={'class': 'form-control'})
         }
