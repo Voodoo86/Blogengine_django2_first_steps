@@ -1,43 +1,35 @@
 {% extends 'blog/base_blog.html' %}
-
 {% block title %}
     Posts list
 {% endblock %}
-
 {% block content %}
-    <h1 class="mb-5">Posts:</h1>
-
-    {% for post in page_object %}
+    <h1 class="mb-3">Posts:</h1>
+    <!-- Posts -->
+    {% for post in object_list %}
         {% include 'blog/includes/post_card_template.html' %}
     {% endfor %}
-
-    {#paginator#}
+    <!-- Paginator -->
     {% if is_paginated %}
         <nav aria-label="...">
             <ul class="pagination" style="margin-bottom: 50px">
                 <li class="page-item {% if not prev_url %} disabled {% endif %}">
                     <a class="page-link" href="{{ prev_url }}" tabindex="-1">Previous</a>
                 </li>
-
-                {% for n in page_object.paginator.page_range %}
-
-                    {% if page_object.number == n %}
+                {% for n in object_list.paginator.page_range %}
+                    {% if object_list.number == n %}
                         <li class="page-item active" aria-current="page">
                             <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
                         </li>
-                    {% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+                    {% elif n > object_list.number|add:-3 and n < object_list.number|add:3 %}
                         <li class="page-item">
                             <a class="page-link" href="?page={{ n }}">{{ n }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
-
                 <li class="page-item {% if not next_url %} disabled {% endif %}">
                     <a class="page-link" href="{{ next_url }}" tabindex="-1">Next</a>
                 </li>
             </ul>
         </nav>
     {% endif %}
-    {#paginator#}
-
 {% endblock %}
